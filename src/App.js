@@ -25,11 +25,23 @@ function App() {
       setalert(null);
     }, 3000);
   };
+const removeBodyClass=()=>{
+    document.body.classList.remove('bg-primary');
+    document.body.classList.remove('bg-secondary');
+    document.body.classList.remove('bg-danger');
+    document.body.classList.remove('bg-success');
+     document.body.classList.remove('bg-warning');
 
-  const togglemode = () => {
+  }
+  const togglemode = (cls) => {
+    console.log(cls);
+    removeBodyClass();
+  
+    document.body.classList.add('bg-'+cls);
+
     if (mode === 'light') {
       setmode('dark');
-      document.body.style.backgroundColor = 'grey';
+      document.body.style.backgroundColor = '#042743';
       showalert("Dark mode has been enabled", "success");
     } else {
       setmode('light');
@@ -52,11 +64,11 @@ function App() {
 
         <div className="container">
           <Routes>
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<About  mode={mode}/>} />
 
             <Route
               path="/"
-              element={<Forms showalert={showalert} hea="enter the text below" mode={mode} />}
+              element={<Forms showalert={showalert} hea="select text utils-uppercase,lowercase,cleartext, copy text." mode={mode} />}
             />
           </Routes>
         </div>

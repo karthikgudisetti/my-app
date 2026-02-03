@@ -16,12 +16,13 @@ export default function TextForm(props) {
 
   const handleClear = () => {
     setText("");
-    props.showalert("converted","success");
+    props.showalert("data cleared sucessfully","success");
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(text);
-    console.log("Text Copied!");
+   
+    props.showalert("data copied sucessfully","success");
   };
 
   const handleRemoveSpaces = () => {
@@ -39,7 +40,7 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container my-3" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
-        <h1>{props.hea}</h1>
+        <h1 className= "mb-4">{props.hea}</h1>
 
         <div className="my-3">
           <textarea
@@ -47,7 +48,7 @@ export default function TextForm(props) {
             value={text}
             onChange={onChangeText}
             style={{
-              backgroundColor: props.mode === 'dark' ? '#6c757d' : 'white',
+              backgroundColor: props.mode === 'dark' ? '#042743' : 'white',
               color: props.mode === 'dark' ? 'white' : 'black'
             }}
             id="mybox"
@@ -55,18 +56,18 @@ export default function TextForm(props) {
           </textarea>
         </div>
 
-        <button className="btn btn-primary mx-2" onClick={handleUpper}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleLower}>Convert to Lowercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleClear}>Clear Text</button>
-        <button className="btn btn-primary mx-2" onClick={handleCopy}>Copy Text</button>
-        <button className="btn btn-primary mx-2" onClick={handleRemoveSpaces}>Remove Extra Spaces</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleUpper}>Convert to Uppercase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleLower}>Convert to Lowercase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleClear}>Clear Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleCopy}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleRemoveSpaces}>Remove Extra Spaces</button>
 
       </div>
 
       <div className="container my-3" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
         <h1>Text Summary</h1>
         <p>
-                    {text.split(" ").length-1} words and {text.length} characters.<br />
+                    {text.split(/\s+/).length-1} words and {text.length} characters.<br />
                     {0.008 * text.split(" ").length} the above text can be read in that much time by an average user.
                 </p>
         <h2>Preview:</h2>
